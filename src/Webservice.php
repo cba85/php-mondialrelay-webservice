@@ -1,8 +1,9 @@
 <?php
 namespace MondialRelay;
 
-use MondialRelay\Traits\Action;
+use MondialRelay\Traits\Method;
 use MondialRelay\Traits\Parameter;
+use MondialRelay\Traits\Webservice as WebserviceTrait;
 use SoapClient;
 
 /**
@@ -10,28 +11,44 @@ use SoapClient;
  */
 class Webservice
 {
-    use Action;
+    use Method;
     use Parameter;
+    use WebserviceTrait;
 
     /**
+     * Webservice URL
+     *
      * @const URL
      */
     const URL = 'https://api.mondialrelay.com/Web_Services.asmx?WSDL';
 
     /**
+     * Client
+     *
      * @var SoapClient
      */
     private $client;
 
     /**
+     * Merchant
+     *
      * @var string
      */
     private $merchant;
 
     /**
+     * Private key
+     *
      * @var string
      */
     private $privateKey;
+
+    /**
+     * Method
+     *
+     * @var Method
+     */
+    private $method;
 
     /**
      * Mondial Relay webservice constructor.

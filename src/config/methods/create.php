@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'Enseigne' => null,
     'ModeCol' => null,
     'ModeLiv' => null,
     'NDossier' => null,

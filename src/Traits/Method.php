@@ -2,36 +2,42 @@
 
 namespace MondialRelay\Traits;
 
+use MondialRelay\Methods\CreateLabel;
+use MondialRelay\Methods\SearchParcelshop;
+use MondialRelay\Methods\SearchPostcode;
+use MondialRelay\Methods\StatLabel;
+
 /**
- * Action trait
+ * Methods trait
  */
-trait Action
+trait Method
 {
     /**
      * Search a distribution Point (Parcelshop, Point Relais)
      *
+     * @param array $parameters
      * @return SoapClient
      */
-    public function searchParcelshop($parameters)
+    public function searchParcelshop(array $parameters)
     {
-        $this->setParameters('search_parcelshop', $parameters);
-        $this->parameters['Security'] = $this->hash($privateKey);
-        return $this->client->WSI4_PointRelais_Recherche($this->parameters)->WSI4_PointRelais_RechercheResult;
+        $checkedParameters = $this->setParameters('search_parcelshop', $parameters);
+        $this->method = new SearchParcelshop($this->client, $checkedParameters);
+        $this->method->make();
+        return $this;
     }
 
     /**
      * Create a label
      *
      * @param array $parameters
-     * @return void
+     * @return self
      */
     public function createLabel(array $parameters)
     {
-        print_r($parameters);
-        print_r($this->setParameters('create', $parameters));
-        die();
-        $this->parameters['Security'] = $this->hash($privateKey);
-        return $this->client->WSI2_CreationEtiquette($this->parameters)->WSI2_CreationEtiquetteResult;
+        $checkedParameters = $this->setParameters('create', $parameters);
+        $this->method = new CreateLabel($this->client, $checkedParameters);
+        $this->method->make();
+        return $this;
     }
 
     /**
@@ -68,9 +74,10 @@ trait Action
      */
     public function searchPostcode($parameters)
     {
-        $this->setParameters('search_postcode', $parameters);
-        $this->parameters['Security'] = $this->hash($privateKey);
-        return $this->client->WSI2_RechercheCP($this->parameters)->WSI2_RechercheCPResult;
+        $checkedParameters = $this->setParameters('search_postcode', $parameters);
+        $this->method = new SearchPostcode($this->client, $checkedParameters);
+        $this->method->make();
+        return $this;
     }
 
     /**
@@ -94,8 +101,9 @@ trait Action
      */
     public function statLabel($parameters)
     {
-        $this->setParameters('stat_label', $parameters);
-        $this->parameters['Security'] = $this->hash($privateKey);
-        return $this->client->WSI2_STAT_Label($this->parameters)->WSI2_STAT_LabelResult;
-    }
+        $checkedParameters = $this->setParameters('stat_label', $parameters);
+        $this->method = new StatLabel($this->client, $checkedParameters);
+        $this->method->make();
+        return $this;
+      }
 }
