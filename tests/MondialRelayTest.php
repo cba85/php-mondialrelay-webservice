@@ -6,90 +6,28 @@ use MondialRelay\Exceptions\ParameterException;
 
 final class MondialRelayTest extends TestCase
 {
-    public function testMondialRelayWebserviceSearchPostcode()
+    public function testInstanceWebservice()
     {
         $mondialrelay = new Webservice('BDTEST13', 'PrivateK');
-        $parameters = [
-            'Pays' => 'FR',
-            'Ville' => 'Paris',
-            'NbResult' => 5
-        ];
-        $searchPostcode = $mondialrelay->searchPostcode($parameters)->getResults();
-        $this->assertSame('0', $searchPostcode->STAT);
+        $this->assertInstanceOf(Webservice::class, $mondialrelay);
     }
 
-    public function testMondialRelayWebserviceSearchPostcodePostCodeParameterError()
+    public function testInstanceWebserviceWithMerchantError()
     {
         $this->expectException(ParameterException::class);
-        $mondialrelay = new Webservice('BDTEST13', 'PrivateK');
-        $parameters = [
-            'Pays' => 'FR',
-            'Ville' => 'Paris',
-            'CP' => '750100',
-            'NbResult' => 5
-        ];
-        $searchPostcode = $mondialrelay->searchPostcode($parameters)->getResults();
-        $this->assertSame('0', $searchPostcode->STAT);
+        $mondialrelay = new Webservice('THISISANERROR', 'PrivateK');
     }
 
-    public function testMondialRelayWebserviceStatLabel()
-    {
-        $mondialrelay = new Webservice('BDTEST13', 'PrivateK');
-        $parameters = [
-            'STAT_ID' => 97,
-            'Langue' => 'FR'
-        ];
-        $statLabel = $mondialrelay->statLabel($parameters)->getResults();
-        $this->assertIsString($statLabel);
-    }
-
-    public function testMondialRelayWebserviceSearchPostcodeError()
-    {
-        $mondialrelay = new Webservice('BDTEST13', 'PrivateK');
-        $parameters = [
-            'Pays' => 'US',
-            'Ville' => 'Paris',
-            'CP' => '75010',
-            'NbResult' => 5
-        ];
-        $searchPostcode = $mondialrelay->searchPostcode($parameters)->getErrorMessage();
-        $this->assertIsString($searchPostcode);
-    }
-
-    public function testMondialRelayWebserviceSearchPostcodeParameterError()
+    public function testInstanceWebserviceWithPrivateKeyError()
     {
         $this->expectException(ParameterException::class);
-        $mondialrelay = new Webservice('BDTEST13', 'PrivateK');
-        $parameters = [
-            'Pays' => 'USFE',
-            'Ville' => 'Paris',
-            'CP' => '75010',
-            'NbResult' => 5
-        ];
-        $searchPostcode = $mondialrelay->searchPostcode($parameters)->getErrorMessage();
-        $this->assertIsString($searchPostcode);
+        $mondialrelay = new Webservice('BDTEST13', 'THISISANERROR');
     }
 
-    /*
-    public function testMondialRelayWebserviceSearchParcelshopParemeterError()
+    public function testCallWrongMethod()
     {
-         $this->expectException(Exception::class);
         $mondialrelay = new Webservice('BDTEST13', 'PrivateK');
-        $parameters = [
-            'Pays' => "FR",
-            'Ville' => "",
-            'CP' => "75010",
-            'Latitude' => "",
-            'Longitude' => "",
-            'Taille' => "",
-            'Poids' => "",
-            'Action' => "",
-            'DelaiEnvoi' => "0",
-            'RayonRecherche' => "20",
-            'NombreResultats' => "20",
-        ];
-        $searchParcelshop = $mondialrelay->searchParcelshop($parameters)->getResults();
-        $this->assertSame('0', $searchParcelshop->STAT);
+        $results = $mondialrelay->createDelivery();
+        $this->assertIsObject($results);
     }
-    */
 }
