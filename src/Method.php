@@ -1,7 +1,9 @@
 <?php
 
-namespace MondialRelay\Methods;
+namespace MondialRelay;
 
+use MondialRelay\Exceptions\ParameterException;
+use MondialRelay\Parameter;
 use SoapClient;
 
 abstract class Method
@@ -14,11 +16,11 @@ abstract class Method
     protected $client;
 
     /**
-     * Parameters
+     * Parameter
      *
-     * @var array
+     * @var Parameter
      */
-    protected $parameters;
+    public $parameter;
 
     /**
      * Request
@@ -43,17 +45,20 @@ abstract class Method
     public function __construct(SoapClient $client, array $parameters)
     {
         $this->client = $client;
-        $this->parameters = $parameters;
+        $this->parameter = new Parameter($this->methodParameters(), $this->regexPatterns());
+        $this->parameters = $this->parameter->setParameters($parameters);
+        if ($this->parameter->getErrors()) {
+            throw new ParameterException;
+        }
     }
 
     /**
      * Get parameters
      *
-     * @return void
+     * @return array
      */
-    public function parameters()
-    {
-        return $this->parameters;
+    public function getParameters() : array {
+        return $this->parameter->getMethodParameters();
     }
 
     /**
@@ -61,7 +66,7 @@ abstract class Method
      *
      * @return self
      */
-    public function make()
+    public function request() : self
     {
         $this->request = $this->client->{$this->name()}($this->parameters);
         return $this;

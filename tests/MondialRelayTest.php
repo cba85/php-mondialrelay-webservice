@@ -2,6 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 use MondialRelay\Webservice;
+use MondialRelay\Exceptions\ParameterException;
 
 final class MondialRelayTest extends TestCase
 {
@@ -11,7 +12,20 @@ final class MondialRelayTest extends TestCase
         $parameters = [
             'Pays' => 'FR',
             'Ville' => 'Paris',
-            'CP' => '75010',
+            'NbResult' => 5
+        ];
+        $searchPostcode = $mondialrelay->searchPostcode($parameters)->getResults();
+        $this->assertSame('0', $searchPostcode->STAT);
+    }
+
+    public function testMondialRelayWebserviceSearchPostcodePostCodeParameterError()
+    {
+        $this->expectException(ParameterException::class);
+        $mondialrelay = new Webservice('BDTEST13', 'PrivateK');
+        $parameters = [
+            'Pays' => 'FR',
+            'Ville' => 'Paris',
+            'CP' => '750100',
             'NbResult' => 5
         ];
         $searchPostcode = $mondialrelay->searchPostcode($parameters)->getResults();
@@ -33,18 +47,33 @@ final class MondialRelayTest extends TestCase
     {
         $mondialrelay = new Webservice('BDTEST13', 'PrivateK');
         $parameters = [
-            'Pays'           => 'US',
-            'Ville'          => 'Paris',
-            'CP'             => '75010',
-            'NbResult'       => 5
+            'Pays' => 'US',
+            'Ville' => 'Paris',
+            'CP' => '75010',
+            'NbResult' => 5
+        ];
+        $searchPostcode = $mondialrelay->searchPostcode($parameters)->getErrorMessage();
+        $this->assertIsString($searchPostcode);
+    }
+
+    public function testMondialRelayWebserviceSearchPostcodeParameterError()
+    {
+        $this->expectException(ParameterException::class);
+        $mondialrelay = new Webservice('BDTEST13', 'PrivateK');
+        $parameters = [
+            'Pays' => 'USFE',
+            'Ville' => 'Paris',
+            'CP' => '75010',
+            'NbResult' => 5
         ];
         $searchPostcode = $mondialrelay->searchPostcode($parameters)->getErrorMessage();
         $this->assertIsString($searchPostcode);
     }
 
     /*
-    public function testMondialRelayWebserviceSearchParcelshop()
+    public function testMondialRelayWebserviceSearchParcelshopParemeterError()
     {
+         $this->expectException(Exception::class);
         $mondialrelay = new Webservice('BDTEST13', 'PrivateK');
         $parameters = [
             'Pays' => "FR",

@@ -2,108 +2,110 @@
 
 namespace MondialRelay\Traits;
 
-use MondialRelay\Methods\CreateLabel;
-use MondialRelay\Methods\SearchParcelshop;
-use MondialRelay\Methods\SearchPostcode;
-use MondialRelay\Methods\StatLabel;
-
 /**
  * Methods trait
  */
 trait Method
 {
     /**
-     * Search a distribution Point (Parcelshop, Point Relais)
+     * Available methods
      *
-     * @param array $parameters
-     * @return SoapClient
+     * @var array
      */
-    public function searchParcelshop(array $parameters)
+    protected $availableMethods = [
+        'searchPostcode',
+        'statLabel',
+        'searchParcelshop',
+        'createLabel',
+        'createShipping',
+        'getLabels',
+        'trackParcel'
+    ];
+
+    /**
+     * Call method
+     *
+     * @param string $name
+     * @param array $arguments
+     * @return void
+     */
+    public function callMethod($name, $arguments)
     {
-        $checkedParameters = $this->setParameters('search_parcelshop', $parameters);
-        $this->method = new SearchParcelshop($this->client, $checkedParameters);
-        $this->method->make();
-        return $this;
+        $parameters = $this->addMerchantAndPrivateKeyToParameters($arguments[0]);
+        $class = "\\MondialRelay\Methods\\" . ucfirst($name);
+        $this->method = new $class($this->client, $parameters);
+        $this->method->request();
     }
 
     /**
-     * Create a label
+     * Dynamic method calling
      *
-     * @param array $parameters
+     * @param string $name
+     * @param array $arguments
      * @return self
      */
-    public function createLabel(array $parameters)
+    public function __call($name, $arguments)
     {
-        $checkedParameters = $this->setParameters('create', $parameters);
-        $this->method = new CreateLabel($this->client, $checkedParameters);
-        $this->method->make();
+        if (in_array($name, $this->availableMethods)) {
+            $this->callMethod($name, $arguments);
+        }
         return $this;
     }
 
     /**
-     * Create a shipping
+     * Get results
      *
-     * @param array $parameters
-     * @return void
+     * @return object
      */
-    public function createShipping($parameters)
+    public function getResults()
     {
-        $this->setParameters('create', $parameters);
-        $this->parameters['Security'] = $this->hash($privateKey);
-        return $this->client->WSI2_CreationExpedition($this->parameters)->WSI2_CreationExpeditionResult;
+        return $this->method->results();
     }
 
     /**
-     * Get labels
+     * Get results in Json format
      *
-     * @param array $parameters
-     * @return void
+     * @return object
      */
-    public function getLabels($parameters)
+    public function getResultsInJson()
     {
-        $this->setParameters('get_labels', $parameters);
-        $this->parameters['Security'] = $this->hash($privateKey);
-        return $this->client->WSI3_GetEtiquettes($this->parameters)->WSI3_GetEtiquettesResult;
+        return json_encode($this->method->results());
     }
 
     /**
-     * Search postcode
+     * Get parameters
      *
-     * @param array $parameters
-     * @return void
+     * @return array
      */
-    public function searchPostcode($parameters)
+    public function getParameters(): array
     {
-        $checkedParameters = $this->setParameters('search_postcode', $parameters);
-        $this->method = new SearchPostcode($this->client, $checkedParameters);
-        $this->method->make();
-        return $this;
+        return $this->method->getParameters();
     }
 
     /**
-     * Track parcel
+     * Get error message
      *
-     * @param array $parameters
-     * @return void
+     * @return string
      */
-    public function trackParcel($parameters)
+    public function getErrorMessage(): string
     {
-        $this->setParameters('track_parcel', $parameters);
-        $this->parameters['Security'] = $this->hash($privateKey);
-        return $this->client->WSI2_TracingColisDetaille($this->parameters)->WSI2_TracingColisDetailleResult;
+        $this->method->results();
+
+        $parameters = [
+            'STAT_ID' => $this->method->results->STAT,
+            'Langue' => 'FR'
+        ];
+
+        return $this->statLabel($parameters)->getResults();
     }
 
     /**
-     * Get status label
+     * Get parameters errors
      *
-     * @param array $parameters
-     * @return void
+     * @return array
      */
-    public function statLabel($parameters)
+    public function getParametersErrors(): array
     {
-        $checkedParameters = $this->setParameters('stat_label', $parameters);
-        $this->method = new StatLabel($this->client, $checkedParameters);
-        $this->method->make();
-        return $this;
-      }
+        return $this->method->parameter->getErrors();
+    }
 }

@@ -3,6 +3,7 @@
 namespace MondialRelay\Methods;
 
 use MondialRelay\Contracts\MethodInterface;
+use MondialRelay\Method;
 
 /**
  * Create label
@@ -17,5 +18,37 @@ class SearchPostcode extends Method implements MethodInterface
     public function name()
     {
         return "WSI2_RechercheCP";
+    }
+
+    /**
+     * Method parameters
+     *
+     * @return array
+     */
+    public function methodParameters()
+    {
+        return [
+            'Enseigne' => null,
+            'Pays' => null,
+            'Ville' => null,
+            'CP' => null,
+            'NbResult' => null
+        ];
+    }
+
+    /**
+     * Regex patterns
+     *
+     * @return array
+     */
+    public function regexPatterns()
+    {
+        return [
+            'Enseigne' => "/^[0-9A-Z]{2}[0-9A-Z]{6}$/",
+            'Pays' => "/^[A-Za-z]{2}$/",
+            'Ville' => "/^[A-Za-z_\-']{2,25}$/",
+            'CP' => null,
+            'NbResult' => null
+        ];
     }
 }

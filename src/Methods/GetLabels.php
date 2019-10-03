@@ -6,9 +6,9 @@ use MondialRelay\Contracts\MethodInterface;
 use MondialRelay\Method;
 
 /**
- * Stat label
+ * Get labels
  */
-class StatLabel extends Method implements MethodInterface
+class GetLabels extends Method implements MethodInterface
 {
     /**
      * Method name
@@ -17,7 +17,7 @@ class StatLabel extends Method implements MethodInterface
      */
     public function name()
     {
-        return "WSI2_STAT_Label";
+        return "WSI3_GetEtiquettes";
     }
 
     /**
@@ -28,9 +28,9 @@ class StatLabel extends Method implements MethodInterface
     public function methodParameters()
     {
         return [
-            'Enseigne' => null,
-            'STAT_ID' => null,
-            'Langue' => null
+            'Enseigne' => '',
+            'Expeditions' => '',
+            'Langue' => ''
         ];
     }
 
@@ -43,7 +43,7 @@ class StatLabel extends Method implements MethodInterface
     {
         return [
             'Enseigne' => "/^[0-9A-Z]{2}[0-9A-Z]{6}$/",
-            'STAT_ID' => "/^[0-9]{1,3}$/",
+            'Expeditions' => "/^[0-9]{8}(;[0-9]{8})*$/",
             'Langue' => "/^[A-Z]{2}$/"
         ];
     }

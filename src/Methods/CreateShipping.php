@@ -6,18 +6,18 @@ use MondialRelay\Contracts\MethodInterface;
 use MondialRelay\Method;
 
 /**
- * Create label
+ * Create Shipping
  */
-class CreateLabel extends Method implements MethodInterface
+class CreateShipping extends Method implements MethodInterface
 {
     /**
      * Method name
      *
      * @return string
      */
-    public function name()
+    public function name() : string
     {
-        return "WSI2_CreationEtiquette";
+        return "WSI2_CreationExpedition";
     }
 
     /**
@@ -25,7 +25,7 @@ class CreateLabel extends Method implements MethodInterface
      *
      * @return array
      */
-    public function methodParameters()
+    public function methodParameters() : array
     {
         return [
             'Enseigne' => null,
@@ -81,7 +81,7 @@ class CreateLabel extends Method implements MethodInterface
      *
      * @return array
      */
-    public function regexPatterns()
+    public function regexPatterns() : array
     {
         return [
             'Enseigne' => "/^[0-9A-Z]{2}[0-9A-Z]{6}$/",
