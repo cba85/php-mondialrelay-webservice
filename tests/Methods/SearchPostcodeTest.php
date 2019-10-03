@@ -31,31 +31,4 @@ final class SearchPostCodeTest extends TestCase
         $searchPostcode = $mondialrelay->searchPostcode($parameters)->getResults();
         $this->assertSame('0', $searchPostcode->STAT);
     }
-
-    public function testSearchPostcodeError()
-    {
-        $mondialrelay = new Webservice('BDTEST13', 'PrivateK');
-        $parameters = [
-            'Pays' => 'US',
-            'Ville' => 'Paris',
-            'CP' => '75010',
-            'NbResult' => 5
-        ];
-        $searchPostcode = $mondialrelay->searchPostcode($parameters)->getErrorMessage();
-        $this->assertIsString($searchPostcode);
-    }
-
-    public function testSearchPostcodeParameterError()
-    {
-        $this->expectException(ParameterException::class);
-        $mondialrelay = new Webservice('BDTEST13', 'PrivateK');
-        $parameters = [
-            'Pays' => 'USFE',
-            'Ville' => 'Paris',
-            'CP' => '75010',
-            'NbResult' => 5
-        ];
-        $searchPostcode = $mondialrelay->searchPostcode($parameters)->getErrorMessage();
-        $this->assertIsString($searchPostcode);
-    }
 }

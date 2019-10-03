@@ -2,6 +2,8 @@
 
 namespace MondialRelay\Traits;
 
+use MondialRelay\Exceptions\MethodException;
+
 /**
  * Methods trait
  */
@@ -48,8 +50,14 @@ trait Method
     {
         if (in_array($name, $this->availableMethods)) {
             $this->callMethod($name, $arguments);
+            return $this;
         }
-        return $this;
+
+        if (method_exists($this, $name)) {
+            return $this;
+        }
+
+        throw new MethodException;
     }
 
     /**

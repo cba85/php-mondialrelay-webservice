@@ -3,6 +3,7 @@
 use PHPUnit\Framework\TestCase;
 use MondialRelay\Webservice;
 use MondialRelay\Exceptions\ParameterException;
+use MondialRelay\Exceptions\MethodException;
 
 final class MondialRelayTest extends TestCase
 {
@@ -26,8 +27,8 @@ final class MondialRelayTest extends TestCase
 
     public function testCallWrongMethod()
     {
+        $this->expectException(MethodException::class);
         $mondialrelay = new Webservice('BDTEST13', 'PrivateK');
-        $results = $mondialrelay->createDelivery();
-        $this->assertIsObject($results);
+        $results = $mondialrelay->createDelivery()->getResults();
     }
 }
