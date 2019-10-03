@@ -2,10 +2,12 @@
 
 namespace MondialRelay\Parameters;
 
+use MondialRelay\Contracts\CountryParameterInterface;
+
 /**
  * Postal code parameter
  */
-class PostalCode extends CountryParameter
+class PostalCode extends CountryParameter implements CountryParameterInterface
 {
     /**
      * Regex patterns

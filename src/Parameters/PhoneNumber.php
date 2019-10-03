@@ -2,10 +2,12 @@
 
 namespace MondialRelay\Parameters;
 
+use MondialRelay\Contracts\CountryParameterInterface;
+
 /**
  * Phone number parameter
  */
-class PhoneNumber extends CountryParameter
+class PhoneNumber extends CountryParameter implements CountryParameterInterface
 {
     /**
      * Regex patterns
