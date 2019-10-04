@@ -45,7 +45,7 @@ class Webservice
      *
      * @var Method
      */
-    private $method;
+    public $method;
 
     /**
      * Mondial Relay webservice constructor.

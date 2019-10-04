@@ -90,10 +90,10 @@ class CreateLabel extends Method implements MethodInterface
             'NDossier' => "/^(|[0-9A-Z_ -]{0,15})$/",
             'NClient' => "/^(|[0-9A-Z]{0,9})$/",
             'Expe_Langage' => "/^[A-Z]{2}$/",
-            'Expe_Ad1' => "/^[0-9A-Z_\-'., /]{2,32}$/",
-            'Expe_Ad2' => "/^[0-9A-Z_\-'., /]{0,32}$/",
-            'Expe_Ad3' => "/^[0-9A-Z_\-'., /]{0,32}$/",
-            'Expe_Ad4' => "/^[0-9A-Z_\-'., /]{0,32}$/",
+            'Expe_Ad1' => "/^[0-9A-Z_\-'., \/]{2,32}$/",
+            'Expe_Ad2' => "/^[0-9A-Z_\-'., \/]{0,32}$/",
+            'Expe_Ad3' => "/^[0-9A-Z_\-'., \/]{0,32}$/",
+            'Expe_Ad4' => "/^[0-9A-Z_\-'., \/]{0,32}$/",
             'Expe_Ville' => null,
             'Expe_CP' => null,
             'Expe_Pays' => "/^[A-Z]{2}/",
@@ -101,10 +101,10 @@ class CreateLabel extends Method implements MethodInterface
             'Expe_Tel2' => null,
             'Expe_Mail' => "/^[\w\-\.\@_]{7,70}$/",
             'Dest_Langage' => "/^[A-Z]{2}$/",
-            'Dest_Ad1' => "/^[0-9A-Z_\-'., /]{2,32}$/",
-            'Dest_Ad2' => "/^[0-9A-Z_\-'., /]{2,32}$/",
-            'Dest_Ad3' => "/^[0-9A-Z_\-'., /]{2,32}$/",
-            'Dest_Ad4' => "/^[0-9A-Z_\-'., /]{2,32}$/",
+            'Dest_Ad1' => "/^[0-9A-Z_\-'., \/]{2,32}$/",
+            'Dest_Ad2' => "/^[0-9A-Z_\-'., \/]{2,32}$/",
+            'Dest_Ad3' => "/^[0-9A-Z_\-'., \/]{2,32}$/",
+            'Dest_Ad4' => "/^[0-9A-Z_\-'., \/]{2,32}$/",
             'Dest_Ville' => null,
             'Dest_CP' => null,
             'Dest_Pays' => "/^[A-Z]{2}/",
@@ -128,7 +128,7 @@ class CreateLabel extends Method implements MethodInterface
             'Montage' => "/^(|[0-9]{1,3})$/",
             'TRDV' => "/^(|O|N)$/",
             'Assurance' => "/^(|[0-9A-Z]{1})$/",
-            'Instructions' => "/^[0-9A-Z_\-'., /]{0,31}/"
+            'Instructions' => "/^[0-9A-Z_\-'., \/]{0,31}/"
         ];
     }
 }

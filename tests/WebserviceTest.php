@@ -5,7 +5,7 @@ use MondialRelay\Webservice;
 use MondialRelay\Exceptions\ParameterException;
 use MondialRelay\Exceptions\MethodException;
 
-final class MondialRelayTest extends TestCase
+final class WebserviceTest extends TestCase
 {
     public function testInstanceWebservice()
     {

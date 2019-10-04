@@ -16,6 +16,13 @@ abstract class Method
     protected $client;
 
     /**
+     * Parameters
+     *
+     * @var array
+     */
+    public $parameters;
+
+    /**
      * Parameter
      *
      * @var Parameter
@@ -45,20 +52,18 @@ abstract class Method
     public function __construct(SoapClient $client, array $parameters)
     {
         $this->client = $client;
-        $this->parameter = new Parameter($this->methodParameters(), $this->regexPatterns());
-        $this->parameters = $this->parameter->setParameters($parameters);
-        if ($this->parameter->getErrors()) {
-            throw new ParameterException;
-        }
+        $this->parameters = $parameters;
     }
 
     /**
-     * Get parameters
+     * Set and check method parameters
      *
-     * @return array
+     * @return void
      */
-    public function getParameters() : array {
-        return $this->parameter->getMethodParameters();
+    public function setAndCheckParameters()
+    {
+        $this->parameter = new Parameter($this->methodParameters(), $this->regexPatterns());
+        $this->parameters = $this->parameter->setParameters($this->parameters);
     }
 
     /**

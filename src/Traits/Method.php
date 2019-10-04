@@ -3,6 +3,7 @@
 namespace MondialRelay\Traits;
 
 use MondialRelay\Exceptions\MethodException;
+use MondialRelay\Exceptions\ParameterException;
 
 /**
  * Methods trait
@@ -36,6 +37,12 @@ trait Method
         $parameters = $this->addMerchantAndPrivateKeyToParameters($arguments[0]);
         $class = "\\MondialRelay\Methods\\" . ucfirst($name);
         $this->method = new $class($this->client, $parameters);
+        $this->method->setAndCheckParameters();
+
+        if ($this->method->parameter->getErrors()) {
+            throw new ParameterException();
+        }
+
         $this->method->request();
     }
 
@@ -81,39 +88,19 @@ trait Method
     }
 
     /**
-     * Get parameters
-     *
-     * @return array
-     */
-    public function getParameters(): array
-    {
-        return $this->method->getParameters();
-    }
-
-    /**
      * Get error message
      *
+     * @param int $stat
+     * @param string $lang
      * @return string
      */
-    public function getErrorMessage(): string
+    public function getErrorMessage(int $stat, string $lang = "FR"): string
     {
-        $this->method->results();
-
         $parameters = [
-            'STAT_ID' => $this->method->results->STAT,
-            'Langue' => 'FR'
+            'STAT_ID' => $stat,
+            'Langue' => $lang
         ];
 
         return $this->statLabel($parameters)->getResults();
-    }
-
-    /**
-     * Get parameters errors
-     *
-     * @return array
-     */
-    public function getParametersErrors(): array
-    {
-        return $this->method->parameter->getErrors();
     }
 }

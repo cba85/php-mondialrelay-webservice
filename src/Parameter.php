@@ -125,10 +125,11 @@ class Parameter
         $webserviceParameters = $this->methodParameters;
         $webserviceParameters['Enseigne'] = $parameters['Enseigne'];
         foreach ($parameters as $key => $parameter) {
+            $parameter = strtoupper($parameter);
             if (array_key_exists($key, $webserviceParameters)) {
                 // Classic regex verification
                 if ($this->checkParameter($key, $parameter)) {
-                    $webserviceParameters[$key] = strtoupper($parameter);
+                    $webserviceParameters[$key] = $parameter;
                 } else {
                     $this->errors[$key] = $parameter;
                 }
