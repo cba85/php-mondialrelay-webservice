@@ -7,8 +7,8 @@ final class PostalCodeParameterTest extends TestCase
 {
     public function testSetParameterOk()
     {
-        $methodsParameters = ['CP' => null];
-        $regexPatterns = ['CP' => null];
+        $methodsParameters = ['CP' => null, 'Pays' => null];
+        $regexPatterns = ['CP' => null, 'Pays' => null];
         $parameters = [
             'Enseigne' => "BDTEST13",
             'PrivateKey' => "PrivateK",
@@ -22,8 +22,8 @@ final class PostalCodeParameterTest extends TestCase
 
     public function testSetParameterKo()
     {
-        $methodsParameters = ['CP' => null];
-        $regexPatterns = ['CP' => null];
+        $methodsParameters = ['CP' => null, 'Pays' => null];
+        $regexPatterns = ['CP' => null, 'Pays' => null];
         $parameters = [
             'Enseigne' => "BDTEST13",
             'PrivateKey' => "PrivateK",

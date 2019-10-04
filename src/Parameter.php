@@ -145,6 +145,10 @@ class Parameter
                         $this->errors[$key] = $parameter;
                     }
                 }
+            } else {
+                if ($key != "Enseigne" and $key != 'PrivateKey') {
+                    $this->errors[$key] = $parameter;
+                }
             }
         }
         $webserviceParameters['Security'] = $this->createSecurityCode($parameters['PrivateKey'], $webserviceParameters);

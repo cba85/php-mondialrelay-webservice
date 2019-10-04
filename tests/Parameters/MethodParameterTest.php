@@ -2,6 +2,8 @@
 
 use PHPUnit\Framework\TestCase;
 use MondialRelay\Parameter;
+use MondialRelay\Webservice;
+use MondialRelay\Exceptions\ParameterException;
 
 final class MethodParameterTest extends TestCase
 {
@@ -53,5 +55,19 @@ final class MethodParameterTest extends TestCase
         $parameter = new Parameter($methodsParameters, $regexPatterns);
         $settedParameters = $parameter->setParameters($parameters);
         $this->assertNotEmpty($parameter->getErrors());
+    }
+
+    public function testSetWrongParameter()
+    {
+        $this->expectException(ParameterException::class);
+        $mondialrelay = new Webservice('BDTEST13', 'PrivateK');
+
+        $parameters = [
+            'STAT_ID' => 97,
+            'Langue' => 'FR',
+            'WrongParameter' => "value"
+        ];
+
+        $statLabel = $mondialrelay->statLabel($parameters)->getResults();
     }
 }
