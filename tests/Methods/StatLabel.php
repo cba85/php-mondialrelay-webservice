@@ -5,7 +5,7 @@ use MondialRelay\Webservice;
 
 final class StatLabelTest extends TestCase
 {
-    public function testMondialRelayWebserviceStatLabel()
+    public function testStatLabel()
     {
         $mondialrelay = new Webservice('BDTEST13', 'PrivateK');
 

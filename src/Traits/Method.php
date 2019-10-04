@@ -41,6 +41,7 @@ trait Method
 
         if ($this->method->parameter->getErrors()) {
             throw new ParameterException();
+            return;
         }
 
         $this->method->request();

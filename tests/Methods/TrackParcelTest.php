@@ -5,7 +5,7 @@ use MondialRelay\Webservice;
 
 final class TrackParcelTest extends TestCase
 {
-    public function testMondialRelayWebserviceTrackParcel()
+    public function testTrackParcel()
     {
         $mondialrelay = new Webservice('BDTEST13', 'PrivateK');
 
