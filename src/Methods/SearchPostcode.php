@@ -21,22 +21,6 @@ class SearchPostcode extends Method implements MethodInterface
     }
 
     /**
-     * Method parameters
-     *
-     * @return array
-     */
-    public function methodParameters()
-    {
-        return [
-            'Enseigne' => null,
-            'Pays' => null,
-            'Ville' => null,
-            'CP' => null,
-            'NbResult' => null
-        ];
-    }
-
-    /**
      * Regex patterns
      *
      * @return array

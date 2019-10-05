@@ -21,20 +21,6 @@ class StatLabel extends Method implements MethodInterface
     }
 
     /**
-     * Method parameters
-     *
-     * @return array
-     */
-    public function methodParameters()
-    {
-        return [
-            'Enseigne' => null,
-            'STAT_ID' => null,
-            'Langue' => null
-        ];
-    }
-
-    /**
      * Regex patterns
      *
      * @return array

@@ -21,62 +21,6 @@ class CreateLabel extends Method implements MethodInterface
     }
 
     /**
-     * Method parameters
-     *
-     * @return array
-     */
-    public function methodParameters()
-    {
-        return [
-            'Enseigne' => null,
-            'ModeCol' => null,
-            'ModeLiv' => null,
-            'NDossier' => null,
-            'NClient' => null,
-            'Expe_Langage' => null,
-            'Expe_Ad1' => null,
-            'Expe_Ad2' => null,
-            'Expe_Ad3' => null,
-            'Expe_Ad4' => null,
-            'Expe_Ville' => null,
-            'Expe_CP' => null,
-            'Expe_Pays' => null,
-            'Expe_Tel1' => null,
-            'Expe_Tel2' => null,
-            'Expe_Mail' => null,
-            'Dest_Langage' => null,
-            'Dest_Ad1' => null,
-            'Dest_Ad2' => null,
-            'Dest_Ad3' => null,
-            'Dest_Ad4' => null,
-            'Dest_Ville' => null,
-            'Dest_CP' => null,
-            'Dest_Pays' => null,
-            'Dest_Tel1' => null,
-            'Dest_Tel2' => null,
-            'Dest_Mail' => null,
-            'Poids' => null,
-            'Longueur' => null,
-            'Taille' => null,
-            'NbColis' => null,
-            'CRT_Valeur' => null,
-            'CRT_Devise' => null,
-            'Exp_Valeur' => null,
-            'Exp_Devise' => null,
-            'COL_Rel_Pays' => null,
-            'COL_Rel' => null,
-            'LIV_Rel_Pays' => null,
-            'LIV_Rel' => null,
-            'TAvisage' => null,
-            'TReprise' => null,
-            'Montage' => null,
-            'TRDV' => null,
-            'Assurance' => null,
-            'Instructions' => null
-        ];
-    }
-
-    /**
      * Regex patterns
      *
      * @return array

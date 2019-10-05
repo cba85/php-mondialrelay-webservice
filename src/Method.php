@@ -62,7 +62,8 @@ abstract class Method
      */
     public function setAndCheckParameters()
     {
-        $this->parameter = new Parameter($this->methodParameters(), $this->regexPatterns());
+        $methodParameters = array_fill_keys(array_keys($this->regexPatterns()), null);
+        $this->parameter = new Parameter($methodParameters, $this->regexPatterns());
         $this->parameters = $this->parameter->setParameters($this->parameters);
     }
 

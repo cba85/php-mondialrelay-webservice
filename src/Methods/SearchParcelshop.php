@@ -21,32 +21,6 @@ class SearchParcelshop extends Method implements MethodInterface
     }
 
     /**
-     * Method parameters
-     *
-     * @return array
-     */
-    public function methodParameters()
-    {
-        return [
-            'Enseigne' => null,
-            'Pays' => null,
-            'NumPointRelais' => null,
-            'Ville' => null,
-            'CP' => null,
-            'Latitude' => null,
-            'Longitude' => null,
-            'Taille' => null,
-            'Poids' => null,
-            'Action' => null,
-            'DelaiEnvoi' => null,
-            'RayonRecherche' => null,
-            'TypeActivite' => null,
-            'NACE' => null,
-            'NombreResultats' => null,
-        ];
-    }
-
-    /**
      * Regex patterns
      *
      * @return array

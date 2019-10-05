@@ -21,20 +21,6 @@ class TrackParcel extends Method implements MethodInterface
     }
 
     /**
-     * Method parameters
-     *
-     * @return array
-     */
-    public function methodParameters()
-    {
-        return [
-            'Enseigne' => '',
-            'Expeditions' => '',
-            'Langue' => ''
-        ];
-    }
-
-    /**
      * Regex patterns
      *
      * @return array
