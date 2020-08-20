@@ -16,19 +16,19 @@ final class WebserviceTest extends TestCase
     public function testInstanceWebserviceWithMerchantError()
     {
         $this->expectException(ParameterException::class);
-        $mondialrelay = new Webservice('THISISANERROR', 'PrivateK');
+        new Webservice('THISISANERROR', 'PrivateK');
     }
 
     public function testInstanceWebserviceWithPrivateKeyError()
     {
         $this->expectException(ParameterException::class);
-        $mondialrelay = new Webservice('BDTEST13', 'THISISANERROR');
+        new Webservice('BDTEST13', 'THISISANERROR');
     }
 
     public function testCallWrongMethod()
     {
         $this->expectException(MethodException::class);
         $mondialrelay = new Webservice('BDTEST13', 'PrivateK');
-        $results = $mondialrelay->createDelivery()->getResults();
+        $mondialrelay->createDelivery()->getResults();
     }
 }

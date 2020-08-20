@@ -1,20 +1,20 @@
 {
-    "name": "cba85/php-mondialrelay-webservice",
-    "description": "PHP interface for Mondial Relay webservice.",
-    "type": "library",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Clement Barbaza",
-            "email": "hi@clementbarbaza.com"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "MondialRelay\\": "src/"
-        }
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^8"
+  "name": "cba85/php-mondialrelay-webservice",
+  "description": "PHP interface for Mondial Relay webservice.",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Clement Barbaza",
+      "email": "hi@clementbarbaza.com"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "MondialRelay\\": "src/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9"
+  }
 }

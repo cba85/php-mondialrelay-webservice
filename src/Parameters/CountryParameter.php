@@ -17,8 +17,7 @@ abstract class CountryParameter
             return true;
         }
 
-        $regex = $this->regexPatterns()[$country];
-        if (!preg_match($regex, $value)) {
+        if (!preg_match($this->regexPatterns()[$country], $value)) {
             return false;
         }
         return true;

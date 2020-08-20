@@ -48,16 +48,16 @@ You could use Mondial Relay test credentials to try the webservice:
 
 ### Available methods
 
-| Method name | Webservice method name |
-|:------------|:-------------------------------------|
-| `searchPostcode()` |  WSI2_RechercheCP |
-| `searchPostcode()` | WSI2_RechercheCP |
-| `statLabel()` |  WSI2_STAT_Label |
-| `searchParcelshop()` |  WSI4_PointRelais_Recherche |
-| `createLabel()` |  WSI2_CreationEtiquette |
-| `createShipping()` |  WSI2_CreationExpedition |
-| `getLabels()` |  WSI3_GetEtiquettes |
-| `trackParcel()` |  WSI2_TracingColisDetaille |
+| Method name          | Webservice method name     |
+| :------------------- | :------------------------- |
+| `searchPostcode()`   | WSI2_RechercheCP           |
+| `searchPostcode()`   | WSI2_RechercheCP           |
+| `statLabel()`        | WSI2_STAT_Label            |
+| `searchParcelshop()` | WSI4_PointRelais_Recherche |
+| `createLabel()`      | WSI2_CreationEtiquette     |
+| `createShipping()`   | WSI2_CreationExpedition    |
+| `getLabels()`        | WSI3_GetEtiquettes         |
+| `trackParcel()`      | WSI2_TracingColisDetaille  |
 
 ### Results
 
@@ -115,7 +115,7 @@ print_r($mondialrelay->method->parameters);
 
 #### Get error parameters
 
-If at least one of your parameter doesn't match its regex patterns  during the parameters checking, an exception will be thrown to prevent useless webservice call.
+If at least one of your parameter doesn't match its regex patterns during the parameters checking, an exception will be thrown to prevent useless webservice call.
 
 You could retrieve these errors:
 
@@ -140,7 +140,6 @@ Array
 */
 ```
 
-
 ## Documentation
 
 - [Mondial Relay Web Service v5.6](https://www.mondialrelay.fr/media/108937/Solution-Web-Service-V5.6.pdf)
@@ -148,5 +147,13 @@ Array
 ## Tests
 
 ```
-$ ./vendor/bin/phpunit --bootstrap vendor/autoload.php tests/MondialRelayTest.php
+$ ./vendor/bin/phpunit --bootstrap vendor/autoload.php
+```
+
+If you want to test something specific, just add the filename you want to test.
+
+Example:
+
+```
+$ ./vendor/bin/phpunit --bootstrap vendor/autoload.php tests/WebserviceTest.php
 ```
