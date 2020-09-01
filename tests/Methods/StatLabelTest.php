@@ -30,4 +30,17 @@ final class StatLabelTest extends TestCase
 
         $mondialrelay->statLabel($parameters)->getResults();
     }
+
+    public function testStatLabelUsingBadParameters()
+    {
+        $this->expectException(MondialRelay\Exceptions\ParameterException::class);
+        $mondialrelay = new Webservice('BDTEST13', 'PrivateK');
+
+        $parameters = [
+            'STAT_ID' => 97,
+            'Langue' => 'ERROR'
+        ];
+
+        $mondialrelay->statLabel($parameters)->getResults();
+    }
 }

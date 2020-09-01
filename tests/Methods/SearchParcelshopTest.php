@@ -34,4 +34,20 @@ final class SearchParcelShopTest extends TestCase
 
         $mondialrelay->searchParcelshop($parameters)->getResults();
     }
+
+    public function testSearchParcelshopUsingBadParameters()
+    {
+        $this->expectException(MondialRelay\Exceptions\ParameterException::class);
+
+        $mondialrelay = new Webservice('BDTEST13', 'PrivateK');
+
+        $parameters = [
+            'Pays' => "FR",
+            'CP' => "ERROR",
+            'RayonRecherche' => "20",
+            'NombreResultats' => "20",
+        ];
+
+        $mondialrelay->searchParcelshop($parameters)->getResults();
+    }
 }

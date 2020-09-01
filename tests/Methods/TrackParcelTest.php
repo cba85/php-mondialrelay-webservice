@@ -30,4 +30,17 @@ final class TrackParcelTest extends TestCase
 
         $mondialrelay->trackParcel($parameters)->getResults();
     }
+
+    public function testTrackParcelUsingBadParameters()
+    {
+        $this->expectException(MondialRelay\Exceptions\ParameterException::class);
+        $mondialrelay = new Webservice('BDTEST13', 'PrivateK');
+
+        $parameters = [
+            'Expedition' => 'ERROR',
+            'Langue' => 'FR'
+        ];
+
+        $mondialrelay->trackParcel($parameters)->getResults();
+    }
 }

@@ -33,4 +33,19 @@ final class SearchPostCodeTest extends TestCase
 
         $mondialrelay->searchPostcode($parameters)->getResults();
     }
+
+    public function testSearchPostcodeUsingBadParameters()
+    {
+        $this->expectException(MondialRelay\Exceptions\ParameterException::class);
+
+        $mondialrelay = new Webservice('BDTEST13', 'PrivateK');
+
+        $parameters = [
+            'Pays' => 'ERROR',
+            'Ville' => 'Paris',
+            'NbResult' => 5
+        ];
+
+        $mondialrelay->searchPostcode($parameters)->getResults();
+    }
 }
