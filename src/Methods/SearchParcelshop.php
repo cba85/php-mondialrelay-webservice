@@ -21,6 +21,19 @@ class SearchParcelshop extends Method implements MethodInterface
     }
 
     /**
+     * Required parameters
+     *
+     * @return array
+     */
+    public function requiredParameters(): array
+    {
+        return [
+            'Pays',
+            'NombreResultats',
+        ];
+    }
+
+    /**
      * Regex patterns
      *
      * @return array

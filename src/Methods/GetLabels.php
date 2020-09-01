@@ -21,6 +21,19 @@ class GetLabels extends Method implements MethodInterface
     }
 
     /**
+     * Required parameters
+     *
+     * @return array
+     */
+    public function requiredParameters(): array
+    {
+        return [
+            'Expeditions',
+            'Langue',
+        ];
+    }
+
+    /**
      * Regex patterns
      *
      * @return array

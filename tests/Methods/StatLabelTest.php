@@ -18,4 +18,16 @@ final class StatLabelTest extends TestCase
 
         $this->assertIsString($statLabel);
     }
+
+    public function testStatLabelWithoutRequiredParameters()
+    {
+        $this->expectException(MondialRelay\Exceptions\ParameterException::class);
+        $mondialrelay = new Webservice('BDTEST13', 'PrivateK');
+
+        $parameters = [
+            'STAT_ID' => 97,
+        ];
+
+        $mondialrelay->statLabel($parameters)->getResults();
+    }
 }

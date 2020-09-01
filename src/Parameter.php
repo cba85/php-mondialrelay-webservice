@@ -22,6 +22,13 @@ class Parameter
     protected $regexPatterns;
 
     /**
+     * Required parameters
+     *
+     * @var array
+     */
+    protected $requiredParameters;
+
+    /**
      * Error
      *
      * @var array
@@ -56,11 +63,13 @@ class Parameter
      *
      * @param array $methodParameters
      * @param array $regexPatterns
+     * @param array $requiredParameters
      */
-    public function __construct(array $methodParameters, array $regexPatterns)
+    public function __construct(array $methodParameters, array $regexPatterns, array $requiredParameters = [])
     {
         $this->methodParameters = $methodParameters;
         $this->regexPatterns = $regexPatterns;
+        $this->requiredParameters = $requiredParameters;
     }
 
     /**
@@ -68,7 +77,7 @@ class Parameter
      *
      * @return array
      */
-    public function getErrors() : array
+    public function getErrors(): array
     {
         return $this->errors;
     }
@@ -78,9 +87,19 @@ class Parameter
      *
      * @return void
      */
-    public function getMethodParameters() : array
+    public function getMethodParameters(): array
     {
         return $this->methodParameters;
+    }
+
+    /**
+     * Get required parameters
+     *
+     * @return void
+     */
+    public function getRequiredParameters(): array
+    {
+        return $this->requiredParameters;
     }
 
     /**
@@ -102,7 +121,7 @@ class Parameter
      * @param string $parameter
      * @return int
      */
-    public function checkParameter(string $key, string $parameter) : bool
+    public function checkParameter(string $key, string $parameter): bool
     {
         if ($regex = $this->getRegexParameter($key)) {
             if (!preg_match($regex, $parameter)) {
@@ -113,17 +132,37 @@ class Parameter
     }
 
     /**
+     * Check method required parameters
+     *
+     * @param array $parameters
+     * @return void
+     */
+    public function checkRequiredParameters(array $parameters)
+    {
+        foreach ($this->requiredParameters as $key => $requiredParameter) {
+            if (!array_key_exists($requiredParameter, $parameters)) {
+                $this->errors[$key] = 'Missing required parameter.';
+            }
+        }
+    }
+
+    /**
      * Check and set parameters
      *
      * @param array $parameters
      * @return array
      */
-    public function setParameters(array $parameters) : array
+    public function setParameters(array $parameters): array
     {
         $postalCode = new PostalCode;
         $phoneNumber = new PhoneNumber;
         $webserviceParameters = $this->methodParameters;
         $webserviceParameters['Enseigne'] = $parameters['Enseigne'];
+
+        // Check required method parameters
+        $this->checkRequiredParameters($parameters);
+
+        // Check Regex parameters
         foreach ($parameters as $key => $parameter) {
             $parameter = strtoupper($parameter);
             if (array_key_exists($key, $webserviceParameters)) {
@@ -151,6 +190,7 @@ class Parameter
                 }
             }
         }
+
         $webserviceParameters['Security'] = $this->createSecurityCode($parameters['PrivateKey'], $webserviceParameters);
         return $webserviceParameters;
     }
@@ -161,7 +201,7 @@ class Parameter
      * @param  array $parameters
      * @return string
      */
-    public function createSecurityCode($privateKey, $parameters) : string
+    public function createSecurityCode($privateKey, $parameters): string
     {
         $code = implode("", $parameters);
         $code .= $privateKey;

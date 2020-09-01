@@ -8,5 +8,6 @@ namespace MondialRelay\Contracts;
 interface MethodInterface
 {
     public function name();
+    public function requiredParameters();
     public function regexPatterns();
 }

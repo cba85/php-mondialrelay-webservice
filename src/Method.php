@@ -2,7 +2,6 @@
 
 namespace MondialRelay;
 
-use MondialRelay\Exceptions\ParameterException;
 use MondialRelay\Parameter;
 use SoapClient;
 
@@ -63,7 +62,7 @@ abstract class Method
     public function setAndCheckParameters()
     {
         $methodParameters = array_fill_keys(array_keys($this->regexPatterns()), null);
-        $this->parameter = new Parameter($methodParameters, $this->regexPatterns());
+        $this->parameter = new Parameter($methodParameters, $this->regexPatterns(), $this->requiredParameters());
         $this->parameters = $this->parameter->setParameters($this->parameters);
     }
 
@@ -72,7 +71,7 @@ abstract class Method
      *
      * @return self
      */
-    public function request() : self
+    public function request(): self
     {
         $this->request = $this->client->{$this->name()}($this->parameters);
         return $this;
@@ -88,5 +87,4 @@ abstract class Method
         $result = "{$this->name()}Result";
         return $this->results = $this->request->{$result};
     }
-
 }

@@ -18,4 +18,17 @@ final class GetLabelsTest extends TestCase
 
         $this->assertSame('0', $getLabels->STAT);
     }
+
+    public function testGetLabelsWithoutRequiredParameters()
+    {
+        $this->expectException(MondialRelay\Exceptions\ParameterException::class);
+
+        $mondialrelay = new Webservice('BDTEST13', 'PrivateK');
+
+        $parameters = [
+            'Langue' => 'FR'
+        ];
+
+        $mondialrelay->getLabels($parameters)->getResults();
+    }
 }

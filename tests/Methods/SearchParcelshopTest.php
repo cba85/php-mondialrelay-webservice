@@ -20,4 +20,18 @@ final class SearchParcelShopTest extends TestCase
 
         $this->assertSame('0', $searchParcelshop->STAT);
     }
+
+    public function testSearchParcelshopWithoutRequiredParameters()
+    {
+        $this->expectException(MondialRelay\Exceptions\ParameterException::class);
+
+        $mondialrelay = new Webservice('BDTEST13', 'PrivateK');
+
+        $parameters = [
+            'Pays' => "FR",
+            'CP' => "75010",
+        ];
+
+        $mondialrelay->searchParcelshop($parameters)->getResults();
+    }
 }

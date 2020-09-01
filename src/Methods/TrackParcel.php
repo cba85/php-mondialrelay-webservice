@@ -21,6 +21,19 @@ class TrackParcel extends Method implements MethodInterface
     }
 
     /**
+     * Required parameters
+     *
+     * @return array
+     */
+    public function requiredParameters(): array
+    {
+        return [
+            'Expedition',
+            'Langue',
+        ];
+    }
+
+    /**
      * Regex patterns
      *
      * @return array
@@ -29,7 +42,7 @@ class TrackParcel extends Method implements MethodInterface
     {
         return [
             'Enseigne' => "/^[0-9A-Z]{2}[0-9A-Z]{6}$/",
-            'Expeditions' => "/^[0-9]{8}$/",
+            'Expedition' => "/^[0-9]{8}$/",
             'Langue' => "/^[A-Z]{2}$/"
         ];
     }

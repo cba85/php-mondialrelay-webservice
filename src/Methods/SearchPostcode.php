@@ -21,6 +21,20 @@ class SearchPostcode extends Method implements MethodInterface
     }
 
     /**
+     * Required parameters
+     *
+     * @return array
+     */
+    public function requiredParameters(): array
+    {
+        return [
+            'Pays',
+            'Ville',
+            'NbResult',
+        ];
+    }
+
+    /**
      * Regex patterns
      *
      * @return array

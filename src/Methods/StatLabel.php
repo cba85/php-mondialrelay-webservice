@@ -15,9 +15,22 @@ class StatLabel extends Method implements MethodInterface
      *
      * @return string
      */
-    public function name()
+    public function name(): string
     {
         return "WSI2_STAT_Label";
+    }
+
+    /**
+     * Required parameters
+     *
+     * @return array
+     */
+    public function requiredParameters(): array
+    {
+        return [
+            'STAT_ID',
+            'Langue',
+        ];
     }
 
     /**
@@ -25,7 +38,7 @@ class StatLabel extends Method implements MethodInterface
      *
      * @return array
      */
-    public function regexPatterns()
+    public function regexPatterns(): array
     {
         return [
             'Enseigne' => "/^[0-9A-Z]{2}[0-9A-Z]{6}$/",

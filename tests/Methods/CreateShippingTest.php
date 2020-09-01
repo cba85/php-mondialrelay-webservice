@@ -39,4 +39,31 @@ final class CreateShippingTest extends TestCase
 
         $this->assertSame('0', $createShipping->STAT);
     }
+
+    public function testCreateShippingWithoutRequiredParameters()
+    {
+        $this->expectException(MondialRelay\Exceptions\ParameterException::class);
+
+        $mondialrelay = new Webservice('BDTEST13', 'PrivateK');
+
+        $parameters = [
+            'ModeCol' => 'REL',
+            'ModeLiv' => '24R',
+            'Expe_Langage' => 'FR',
+            'Expe_Ad1' => 'The sender',
+            'Expe_Ad3' => "Sender street",
+            'Expe_Ville' => "Paris",
+            'Expe_CP' => "75001",
+            'Expe_Pays' => "FR",
+            'Expe_Tel1' => "+33612345678",
+            'Dest_Langage' => 'FR',
+            'Dest_Ad1' => "The receiver",
+            'Dest_Ad3' => "Receiver street",
+            'Dest_Ville' => "Toulouse",
+            'Dest_CP' => "31000",
+            'Dest_Pays' => "FR",
+        ];
+
+        $mondialrelay->createShipping($parameters)->getResults();
+    }
 }

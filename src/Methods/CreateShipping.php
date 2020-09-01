@@ -15,9 +15,39 @@ class CreateShipping extends Method implements MethodInterface
      *
      * @return string
      */
-    public function name() : string
+    public function name(): string
     {
         return "WSI2_CreationExpedition";
+    }
+
+    /**
+     * Required parameters
+     *
+     * @return array
+     */
+    public function requiredParameters(): array
+    {
+        return [
+            'ModeCol',
+            'ModeLiv',
+            'Expe_Langage',
+            'Expe_Ad1',
+            'Expe_Ad3',
+            'Expe_Ville',
+            'Expe_CP',
+            'Expe_Pays',
+            'Expe_Tel1',
+            'Dest_Langage',
+            'Dest_Ad1',
+            'Dest_Ad3',
+            'Dest_Ville',
+            'Dest_CP',
+            'Dest_Pays',
+            'Dest_Tel1',
+            'Poids',
+            'NbColis',
+            'CRT_Valeur',
+        ];
     }
 
     /**
@@ -25,7 +55,7 @@ class CreateShipping extends Method implements MethodInterface
      *
      * @return array
      */
-    public function regexPatterns() : array
+    public function regexPatterns(): array
     {
         return [
             'Enseigne' => "/^[0-9A-Z]{2}[0-9A-Z]{6}$/",

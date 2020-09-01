@@ -19,4 +19,18 @@ final class SearchPostCodeTest extends TestCase
 
         $this->assertSame('0', $searchPostcode->STAT);
     }
+
+    public function testSearchPostcodeWithoutRequiredParameters()
+    {
+        $this->expectException(MondialRelay\Exceptions\ParameterException::class);
+
+        $mondialrelay = new Webservice('BDTEST13', 'PrivateK');
+
+        $parameters = [
+            'Pays' => 'FR',
+            'Ville' => 'Paris',
+        ];
+
+        $mondialrelay->searchPostcode($parameters)->getResults();
+    }
 }

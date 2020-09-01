@@ -1,4 +1,5 @@
 <?php
+
 namespace MondialRelay;
 
 use MondialRelay\Traits\Method;
@@ -55,7 +56,8 @@ class Webservice
     public function __construct(string $merchant, string $privateKey)
     {
         $parameter = new Parameter(
-            $this->getWebserviceParameters($merchant, $privateKey), $this->getWebserviceRegexPatterns()
+            $this->getWebserviceParameters($merchant, $privateKey),
+            $this->getWebserviceRegexPatterns()
         );
         if (!$parameter->checkParameter('merchant', $merchant) or !$parameter->checkParameter('privateKey', $privateKey)) {
             throw new ParameterException;
@@ -72,7 +74,7 @@ class Webservice
      * @param string $privateKey
      * @return array
      */
-    public function getWebserviceParameters(string $merchant, string $privateKey) : array
+    public function getWebserviceParameters(string $merchant, string $privateKey): array
     {
         return [
             'Enseigne' => $merchant,
@@ -85,7 +87,7 @@ class Webservice
      *
      * @return array
      */
-    public function getWebserviceRegexPatterns() : array
+    public function getWebserviceRegexPatterns(): array
     {
         return [
             'merchant' => "/^[0-9A-Z]{2}[0-9A-Z]{6}$/",
@@ -99,7 +101,7 @@ class Webservice
      * @param array $parameters
      * @return void
      */
-    public function addMerchantAndPrivateKeyToParameters(array $parameters) : array
+    public function addMerchantAndPrivateKeyToParameters(array $parameters): array
     {
         return array_merge([
             'Enseigne' => $this->merchant,
