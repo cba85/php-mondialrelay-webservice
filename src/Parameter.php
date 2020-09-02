@@ -141,7 +141,7 @@ class Parameter
     {
         foreach ($this->requiredParameters as $key => $requiredParameter) {
             if (!array_key_exists($requiredParameter, $parameters)) {
-                $this->errors[$key] = 'Missing required parameter.';
+                $this->errors[$requiredParameter] = 'Missing required parameter.';
             }
         }
     }
